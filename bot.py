@@ -58,7 +58,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 def main() -> None:
     """Start the bot."""
 
-        """Start Flask in a thread and the bot using polling."""
+    """Start Flask in a thread and the bot using polling."""
     # Start Flask server in a background thread
     threading.Thread(target=start_flask, daemon=True).start()
 
