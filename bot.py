@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # The token for your bot, which you get from BotFather
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE" # IMPORTANT: Replace this with your actual bot token
+BOT_TOKEN = "7475854737:AAF8gqbsPLEXVwqty05-PLWr-r4FmfdyQok" # IMPORTANT: Replace this with your actual bot token
 
 # The URL you want to send
 WEBSITE_URL = "https://friendsacademy.my.canva.site/watch-tutorial"
