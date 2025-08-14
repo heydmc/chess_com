@@ -4,11 +4,11 @@
 
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, ContextTypes
 
 # Enable logging to see errors and bot activity
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
 
@@ -21,7 +21,7 @@ BOT_TOKEN = "7475854737:AAF8gqbsPLEXVwqty05-PLWr-r4FmfdyQok"
 WEBSITE_URL = "https://friendsacademy.my.canva.site/watch-tutorial"
 
 # This function is called when a user sends the /start command
-def start(update: Update, context: CallbackContext) -> None:
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with a button that links to your website."""
     
     # Create a button that opens the URL
@@ -36,27 +36,19 @@ def start(update: Update, context: CallbackContext) -> None:
     message = "Welcome! Click the button below to watch the tutorial."
     
     # Send the message with the button
-    update.message.reply_text(message, reply_markup=reply_markup)
+    await update.message.reply_text(message, reply_markup=reply_markup)
 
 def main() -> None:
     """Start the bot."""
-    # Create the Updater and pass it your bot's token.
-    updater = Updater(BOT_TOKEN)
-
-    # Get the dispatcher to register handlers
-    dispatcher = updater.dispatcher
+    # Create the Application and pass it your bot's token.
+    application = Application.builder().token(BOT_TOKEN).build()
 
     # Register the command handler for the /start command
-    dispatcher.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("start", start))
 
     # Start the Bot by polling for updates
     print("Bot is running...")
-    updater.start_polling()
-
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
-    updater.idle()
+    application.run_polling()
 
 if __name__ == '__main__':
     main()
