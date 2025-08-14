@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # The token for your bot, which you get from BotFather
-BOT_TOKEN = "7475854737:AAF8gqbsPLEXVwqty05-PLWr-r4FmfdyQok" # IMPORTANT: Replace this with your actual bot token
+BOT_TOKEN = "7475854737:AAF8gqbsPLEXVwqty05-PLWr-r4FmfdyQok"
 
 # The URL you want to send
 WEBSITE_URL = "https://friendsacademy.my.canva.site/watch-tutorial"
@@ -49,7 +49,7 @@ def main() -> None:
     # Register the command handler for the /start command
     dispatcher.add_handler(CommandHandler("start", start))
 
-    # Start the Bot
+    # Start the Bot by polling for updates
     print("Bot is running...")
     updater.start_polling()
 
