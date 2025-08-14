@@ -5,6 +5,23 @@
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes
+from flask import Flask
+import threading
+
+
+
+# --- FLASK APP FOR RENDER HEALTH CHECK ---
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Quiz Bot is running!"
+
+# Function to start Flask in a separate thread
+def start_flask():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
+
 
 # Enable logging to see errors and bot activity
 logging.basicConfig(
@@ -40,6 +57,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 def main() -> None:
     """Start the bot."""
+
+        """Start Flask in a thread and the bot using polling."""
+    # Start Flask server in a background thread
+    threading.Thread(target=start_flask, daemon=True).start()
+
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(BOT_TOKEN).build()
 
